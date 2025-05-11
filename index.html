@@ -72,7 +72,7 @@
       const discountedUSD = totalUSD * (1 - sale / 100);
       result += `<hr class="my-2"/>Total before sale: <strong>$${totalUSD.toFixed(2)}</strong><br/>`;
       result += `Sale (${sale}%): <strong>−$${(totalUSD - discountedUSD).toFixed(2)}</strong><br/>`;
-      result += `<strong>Total after sale: $${discountedUSD.toFixed(2)}</strong>`;
+      result += `<h1 class="text-3xl"><strong>Total after sale: $${discountedUSD.toFixed(2)}</strong></h1>`;
 
       document.getElementById("result").innerHTML = result;
     }
