@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robux to USD Calculator</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white p-6 rounded-2xl shadow-lg max-w-md w-full">
+    <h1 class="text-2xl font-bold mb-4 text-center">Robux to USD Calculator</h1>
+    <input id="robuxInput" type="number" placeholder="Enter Robux" class="w-full p-3 border rounded-lg mb-4" />
+    <button onclick="calculateUSD()" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">Calculate</button>
+    <div id="result" class="mt-4 text-lg font-medium text-gray-800"></div>
+  </div>
+
+  <script>
+    const bundles = [
+      { robux: 24000, usd: 199.99 },
+      { robux: 11100, usd: 99.99 },
+      { robux: 5775, usd: 49.99 },
+      { robux: 2750, usd: 24.99 },
+      { robux: 2200, usd: 19.99 },
+      { robux: 1100, usd: 9.99 },
+      { robux: 550, usd: 4.99 },
+      { robux: 360, usd: 3.99 },
+      { robux: 270, usd: 2.99 },
+      { robux: 180, usd: 1.99 },
+      { robux: 88, usd: 0.99 },
+      { robux: 40, usd: 0.49 },
+      { robux: 1, usd: 0.10 }
+    ];
+
+    function calculateUSD() {
+      let robux = parseInt(document.getElementById("robuxInput").value);
+      let result = "";
+      let totalUSD = 0;
+      if (isNaN(robux) || robux <= 0) {
+        document.getElementById("result").innerText = "Please enter a valid Robux amount.";
+        return;
+      }
+
+      for (const bundle of bundles) {
+        const count = Math.floor(robux / bundle.robux);
+        if (count > 0) {
+          result += `${count} × ${bundle.robux} Robux = $${(count * bundle.usd).toFixed(2)}<br/>`;
+          totalUSD += count * bundle.usd;
+          robux -= count * bundle.robux;
+        }
+      }
+
+      result += `<hr class="my-2"/>Total: <strong>$${totalUSD.toFixed(2)}</strong>`;
+      document.getElementById("result").innerHTML = result;
+    }
+  </script>
+</body>
+</html>
