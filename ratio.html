@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Monitor Aspect Ratio</title>
+  </head>
+  <body class="p-[3%] flex flex-col items-center justify-center min-h-screen bg-gray-50">
+
+    <div id="ratio" class="font-extrabold text-center leading-tight text-[3000%]"></div>
+
+    <button id="copyBtn"
+      class="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+      Copy Ratio
+    </button>
+
+    <script>
+      function gcd(a, b){ return b === 0 ? a : gcd(b, a % b); }
+
+      const w = screen.width;
+      const h = screen.height;
+      const d = gcd(w, h);
+      const ratioStr = w/d + ':' + h/d; // plain ASCII colon, no unicode spaces
+      const ratioEl = document.getElementById('ratio');
+      ratioEl.textContent = ratioStr;
+
+      document.getElementById('copyBtn').addEventListener('click', () => {
+        navigator.clipboard.writeText(ratioStr)
+          .catch(()=> alert('Cannot copy'));
+      });
+    </script>
+  </body>
+</html>
